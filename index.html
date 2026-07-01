@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bewerbung Project Manager Ski Resorts & Destinations – Toni Vollmann</title>
+<meta name="description" content="Bewerbung als Project Manager Ski Resorts & Destinations bei AXESS AG. Technischer Hintergrund mit IT und Mechatronik, Projektleitung und Kundenbetreuung.">
+<style>
+/* ============================================
+CSS RESET & BASE
+============================================ */
+*, *::before, *::after {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+:root {
+--color-primary: #e87722;
+--color-primary-dark: #c55f15;
+--color-secondary: #f4a261;
+--color-accent: #264653;
+--color-accent-light: #2a9d8f;
+--color-dark: #1a1a1a;
+--color-light: #f8f9fa;
+--color-white: #ffffff;
+--color-text: #333333;
+--color-text-light: #666666;
+--color-border: #e0e0e0;
+--font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+--font-serif: Georgia, 'Times New Roman', serif;
+--transition-smooth: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+--transition-fast: all 0.3s ease;
+--shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+--shadow-md: 0 8px 24px rgba(0,0,0,0.12);
+--shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+--radius-sm: 8px;
+--radius-md: 16px;
+--radius-lg: 24px;
+}
+html {
+scroll-behavior: smooth;
+}
+body {
+font-family: var(--font-sans);
+line-height: 1.6;
+color: var(--color-text);
+background: var(--color-light);
+overflow-x: hidden;
+-webkit-font-smoothing: antialiased;
+}
+/* ============================================
+PROGRESS BAR
+============================================ */
+.progress-indicator {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 4px;
+background: rgba(255,255,255,0.2);
+z-index: 10000;
+opacity: 0;
+transition: opacity 0.4s ease;
+}
+.progress-indicator--active {
+opacity: 1;
+}
+.progress-indicator__bar {
+position: absolute;
+top: 0;
+left: 0;
+height: 100%;
+width: 0%;
+background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+transition: width 0.1s linear;
+}
+/* ============================================
+NAVIGATION
+============================================ */
+.nav {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+padding: 1rem 2rem;
+z-index: 9999;
+background: transparent;
+transition: background 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
+-webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
+mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
+}
+.nav--on-light .nav__link {
+color: var(--color-dark);
+}
+.nav--on-light .nav__burger span {
+background: var(--color-dark);
+}
+.nav__container {
+max-width: 1200px;
+margin: 0 auto;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.nav__logo {
+height: 100px;
+width: auto;
+}
+.nav__links {
+display: none;
+}
+.nav__link {
+color: #ffffff;
+text-decoration: none;
+font-weight: 500;
+font-size: 0.95rem;
+position: relative;
+transition: color 0.4s ease;
+}
+.nav__link::after {
+content: '';
+position: absolute;
+bottom: -4px;
+left: 0;
+width: 0;
+height: 2px;
+background: var(--color-primary);
+transition: width 0.3s ease;
+}
+.nav__link:hover::after {
+width: 100%;
+}
+.nav__burger {
+display: block;
+background: none;
+border: none;
+cursor: pointer;
+padding: 0.5rem;
+position: relative;
+z-index: 10001;
+}
+.nav__burger span {
+display: block;
+width: 24px;
+height: 2px;
+background: #ffffff;
+margin: 5px 0;
+transition: background 0.4s ease;
+}
+.nav__burger--open span:nth-child(1) {
+transform: rotate(45deg) translate(5px, 5px);
+}
+.nav__burger--open span:nth-child(2) {
+opacity: 0;
+}
+.nav__burger--open span:nth-child(3) {
+transform: rotate(-45deg) translate(7px, -6px);
+}
+/* ============================================
+FULL-SCREEN DROPDOWN MENÜ
+============================================ */
+.mobile-dropdown {
+position: fixed;
+top: 0px;
+right: 2rem;
+width: fit-content;
+min-width: 200px;
+height: 100vh;
+height: 100dvh;
+background: rgba(255, 255, 255, 0.5);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+z-index: 10000;
+display: none;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 2rem 2.5rem;
+box-shadow: -10px 0 40px rgba(0,0,0,0.15);
+border-radius: 0;
+}
+.mobile-dropdown--open {
+display: flex;
+}
+.mobile-dropdown__link {
+color: var(--color-dark);
+text-decoration: none;
+font-weight: 500;
+font-size: 1.3rem;
+padding: 1.5rem 0;
+border-bottom: 1px solid rgba(0,0,0,0.06);
+transition: all 0.3s ease;
+white-space: nowrap;
+width: 100%;
+text-align: left;
+}
+.mobile-dropdown__link:last-child {
+border-bottom: none;
+}
+.mobile-dropdown__link:hover {
+color: var(--color-primary);
+padding-left: 1rem;
+}
+.mobile-dropdown--open .mobile-dropdown__link {
+animation: slideInLink 0.4s ease forwards;
+opacity: 0;
+transform: translateY(20px);
+}
+
+.mobile-dropdown--open .mobile-dropdown__link:nth-child(1) { animation-delay: 0.05s; }
+.mobile-dropdown--open .mobile-dropdown__link:nth-child(2) { animation-delay: 0.10s; }
+.mobile-dropdown--open .mobile-dropdown__link:nth-child(3) { animation-delay: 0.15s; }
+.mobile-dropdown--open .mobile-dropdown__link:nth-child(4) { animation-delay: 0.20s; }
+.mobile-dropdown--open .mobile-dropdown__link:nth-child(5) { animation-delay: 0.25s; }
+.mobile-dropdown--open .mobile-dropdown__link:nth-child(6) { animation-delay: 0.30s; }
+
+@keyframes slideInLink {
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+/* ============================================
+HERO SECTION
+============================================ */
+.hero {
+position: relative;
+height: 100vh;
+min-height: 600px;
+display: flex;
+align-items: center;
+justify-content: center;
+overflow: hidden;
+background: var(--color-dark);
+}
+.hero__background {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: url('hero.png') center/cover no-repeat;
+will-change: transform;
+}
+.hero__overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(
+180deg,
+rgba(0,0,0,0.2) 0%,
+rgba(0,0,0,0.6) 50%,
+rgba(0,0,0,0.1) 100%
+);
+}
+.hero__content {
+position: relative;
+z-index: 2;
+text-align: center;
+color: var(--color-white);
+max-width: 900px;
+padding: 0 2rem;
+}
+.hero__eyebrow {
+font-size: 0.9rem;
+letter-spacing: 3px;
+text-transform: uppercase;
+margin-bottom: 1.5rem;
+opacity: 0;
+transform: translateY(20px);
+}
+.hero__title {
+font-family: var(--font-serif);
+font-size: clamp(2.5rem, 6vw, 5rem);
+font-weight: 400;
+line-height: 1.1;
+margin-bottom: 1.5rem;
+opacity: 0;
+transform: translateY(30px);
+}
+.hero__subtitle {
+font-size: clamp(1.1rem, 2vw, 1.4rem);
+font-weight: 300;
+line-height: 1.5;
+margin-bottom: 2rem;
+opacity: 0;
+transform: translateY(30px);
+}
+.hero__team {
+font-size: 1rem;
+letter-spacing: 1px;
+opacity: 0;
+transform: translateY(20px);
+}
+.hero__scroll {
+position: absolute;
+bottom: 2rem;
+left: 50%;
+transform: translateX(-50%);
+color: var(--color-white);
+font-size: 0.85rem;
+letter-spacing: 2px;
+text-transform: uppercase;
+opacity: 0;
+animation: fadeInUp 1s ease 1.5s forwards;
+}
+.hero__scroll::after {
+content: '';
+display: block;
+width: 1px;
+height: 40px;
+background: var(--color-white);
+margin: 1rem auto 0;
+animation: scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine {
+0%, 100% { transform: scaleY(0.5); opacity: 0.3; }
+50% { transform: scaleY(1); opacity: 1; }
+}
+@keyframes fadeInUp {
+to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+/* ============================================
+SECTION BASE
+============================================ */
+.section {
+padding: 6rem 2rem;
+max-width: 1200px;
+margin: 0 auto;
+}
+.section--full {
+max-width: none;
+padding: 6rem 0;
+}
+.section--dark {
+background: var(--color-dark);
+color: var(--color-white);
+}
+.section--light {
+background: var(--color-light);
+}
+.section__header {
+text-align: center;
+margin-bottom: 4rem;
+}
+.section__eyebrow {
+font-size: 0.85rem;
+letter-spacing: 3px;
+text-transform: uppercase;
+color: var(--color-primary);
+margin-bottom: 1rem;
+font-weight: 600;
+}
+.section__title {
+font-family: var(--font-serif);
+font-size: clamp(2rem, 4vw, 3.5rem);
+font-weight: 400;
+line-height: 1.2;
+margin-bottom: 1.5rem;
+}
+.section__lead {
+font-size: 1.2rem;
+color: var(--color-text-light);
+max-width: 700px;
+margin: 0 auto;
+line-height: 1.7;
+}
+.section--dark .section__lead {
+color: rgba(255,255,255,0.7);
+}
+/* ============================================
+FADE SCROLL
+============================================ */
+.fade-scroll {
+position: relative;
+}
+.fade-scroll__background {
+position: sticky;
+top: 0;
+height: 100vh;
+width: 100%;
+overflow: hidden;
+}
+.fade-scroll__bg-item {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+opacity: 0;
+transition: opacity 1s ease;
+background-size: cover;
+background-position: center;
+}
+.fade-scroll__bg-item--active {
+opacity: 1;
+}
+.fade-scroll__bg-item:first-child {
+opacity: 1;
+}
+.fade-scroll__foreground {
+position: relative;
+margin-top: -100vh;
+z-index: 2;
+}
+.fade-scroll__slide {
+height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 2rem;
+}
+.fade-scroll__card {
+background: rgba(255,255,255,0.95);
+backdrop-filter: blur(10px);
+padding: 3rem;
+border-radius: var(--radius-lg);
+max-width: 700px;
+box-shadow: var(--shadow-lg);
+opacity: 0;
+transform: translateY(40px);
+transition: var(--transition-smooth);
+}
+.fade-scroll__card--visible {
+opacity: 1;
+transform: translateY(0);
+}
+.fade-scroll__card h3 {
+font-family: var(--font-serif);
+font-size: 1.8rem;
+margin-bottom: 1rem;
+color: var(--color-accent);
+}
+.fade-scroll__card p {
+font-size: 1.1rem;
+line-height: 1.7;
+color: var(--color-text);
+margin-bottom: 1rem;
+}
+/* ============================================
+STICKY SCROLL (Über mich - Desktop)
+============================================ */
+.sticky-scroll {
+background: var(--color-light);
+}
+.sticky-scroll__container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 2rem;
+}
+.sticky-scroll__content {
+display: flex;
+gap: 4rem;
+align-items: flex-start;
+}
+.sticky-scroll__media {
+flex: 1;
+position: sticky;
+top: 100px;
+height: calc(100vh - 120px);
+max-height: 700px;
+border-radius: var(--radius-lg);
+overflow: hidden;
+box-shadow: var(--shadow-lg);
+}
+.sticky-scroll__media-item {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+opacity: 0;
+transition: opacity 0.8s ease;
+background-size: cover;
+background-position: center;
+}
+.sticky-scroll__media-item--visible {
+opacity: 1;
+}
+.sticky-scroll__items {
+flex: 1;
+padding-top: 100px;
+}
+.sticky-scroll__item {
+margin-bottom: 6rem;
+opacity: 0;
+transform: translateX(40px);
+transition: var(--transition-smooth);
+}
+.sticky-scroll__item--visible {
+opacity: 1;
+transform: translateX(0);
+}
+.sticky-scroll__item h3 {
+font-family: var(--font-serif);
+font-size: 2rem;
+color: var(--color-accent);
+margin-bottom: 0.5rem;
+}
+.sticky-scroll__role {
+font-size: 1rem;
+color: var(--color-primary);
+font-weight: 600;
+letter-spacing: 1px;
+text-transform: uppercase;
+margin-bottom: 1.5rem;
+}
+.sticky-scroll__item p {
+font-size: 1.1rem;
+line-height: 1.8;
+color: var(--color-text);
+margin-bottom: 1rem;
+}
+.sticky-scroll__skills {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 2rem;
+}
+.skill-tag {
+background: var(--color-primary);
+color: var(--color-white);
+padding: 0.5rem 1.25rem;
+border-radius: 50px;
+font-size: 0.85rem;
+font-weight: 600;
+opacity: 0;
+transform: scale(0.8);
+transition: var(--transition-smooth);
+}
+.skill-tag--visible {
+opacity: 1;
+transform: scale(1);
+}
+/* ============================================
+MOBILE TEAM FLOW
+============================================ */
+@media (max-width: 767px) {
+.team-mobile {
+display: block !important;
+}
+.team-mobile__member {
+width: 100%;
+}
+.team-mobile__photo-section {
+position: relative;
+height: 100vh;
+overflow: hidden;
+}
+.team-mobile__photo {
+position: absolute;
+top: -10%;
+left: 0;
+width: 100%;
+height: 120%;
+background-size: cover;
+background-position: center;
+will-change: transform;
+z-index: 1;
+}
+.team-mobile__overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(
+180deg,
+rgba(0,0,0,0.2) 0%,
+rgba(0,0,0,0.1) 40%,
+rgba(0,0,0,0.7) 100%
+);
+z-index: 2;
+}
+.team-mobile__identity {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+text-align: center;
+color: white;
+z-index: 3;
+width: 90%;
+opacity: 0;
+}
+.team-mobile__name {
+font-family: var(--font-serif);
+font-size: clamp(2.5rem, 10vw, 4rem);
+font-weight: 400;
+margin-bottom: 0.5rem;
+line-height: 1.1;
+}
+.team-mobile__role {
+font-size: clamp(1rem, 3.5vw, 1.2rem);
+letter-spacing: 2px;
+text-transform: uppercase;
+opacity: 0.9;
+font-weight: 500;
+}
+.team-mobile__scroll-hint {
+position: absolute;
+bottom: 2rem;
+left: 50%;
+transform: translateX(-50%);
+color: white;
+font-size: 0.75rem;
+letter-spacing: 2px;
+text-transform: uppercase;
+z-index: 3;
+opacity: 0;
+animation: fadeInHint 1s ease 1s forwards;
+}
+.team-mobile__scroll-hint::after {
+content: '';
+display: block;
+width: 1px;
+height: 30px;
+background: white;
+margin: 0.75rem auto 0;
+animation: scrollLine 2s ease-in-out infinite;
+}
+@keyframes fadeInHint {
+to { opacity: 0.8; }
+}
+.team-mobile__text-section {
+height: 100vh;
+background: var(--color-white);
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 4rem 2rem;
+}
+.team-mobile__text-content {
+max-width: 600px;
+opacity: 0;
+transform: translateY(40px);
+}
+.team-mobile__text-content--visible {
+opacity: 1;
+transform: translateY(0);
+transition: var(--transition-smooth);
+}
+.team-mobile__text-role {
+font-size: 0.85rem;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(--color-primary);
+font-weight: 600;
+margin-bottom: 1rem;
+}
+.team-mobile__text-name {
+font-family: var(--font-serif);
+font-size: 2rem;
+color: var(--color-accent);
+margin-bottom: 2rem;
+line-height: 1.2;
+}
+.team-mobile__text-description {
+font-size: 1.1rem;
+line-height: 1.8;
+color: var(--color-text);
+margin-bottom: 1.5rem;
+}
+.team-mobile__skills {
+display: flex;
+flex-wrap: wrap;
+gap: 0.5rem;
+margin-top: 2.5rem;
+}
+.team-mobile__skill-tag {
+background: var(--color-primary);
+color: white;
+padding: 0.5rem 1rem;
+border-radius: 50px;
+font-size: 0.8rem;
+font-weight: 600;
+}
+}
+@media (min-width: 768px) {
+.team-mobile {
+display: none !important;
+}
+}
+@media (max-width: 767px) {
+.team-mobile {
+display: none !important;
+}
+.sticky-scroll__content {
+display: flex !important;
+flex-direction: column;
+gap: 2rem;
+}
+.sticky-scroll__media {
+position: relative !important;
+top: 0 !important;
+height: 400px !important;
+max-height: none !important;
+width: 100% !important;
+margin-bottom: 2rem;
+}
+.sticky-scroll__items {
+padding-top: 0 !important;
+}
+.sticky-scroll .section__header {
+padding: 4rem 2rem 2rem;
+margin-bottom: 2rem;
+}
+}
+/* ============================================
+KNOW-HOW GRID
+============================================ */
+.concept-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+gap: 2rem;
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 2rem;
+}
+.concept-card {
+background: var(--color-white);
+padding: 2.5rem;
+border-radius: var(--radius-md);
+box-shadow: var(--shadow-sm);
+transition: var(--transition-smooth);
+opacity: 0;
+transform: translateY(40px);
+border-top: 3px solid var(--color-primary);
+}
+.concept-card--visible {
+opacity: 1;
+transform: translateY(0);
+}
+.concept-card:hover {
+transform: translateY(-8px);
+box-shadow: var(--shadow-lg);
+}
+.concept-card__icon {
+font-size: 2.5rem;
+margin-bottom: 1.5rem;
+}
+.concept-card h3 {
+font-family: var(--font-serif);
+font-size: 1.5rem;
+color: var(--color-accent);
+margin-bottom: 1rem;
+}
+.concept-card p {
+font-size: 1rem;
+line-height: 1.7;
+color: var(--color-text-light);
+margin-bottom: 1rem;
+}
+.concept-card ul {
+list-style: none;
+padding: 0;
+}
+.concept-card li {
+padding: 0.5rem 0 0.5rem 1.75rem;
+position: relative;
+font-size: 0.95rem;
+color: var(--color-text);
+}
+.concept-card li::before {
+content: '✓';
+position: absolute;
+left: 0;
+color: var(--color-primary);
+font-weight: bold;
+font-size: 1.1rem;
+}
+/* ============================================
+STATS SECTION
+============================================ */
+.stats-section {
+background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
+color: var(--color-white);
+padding: 6rem 2rem;
+}
+.stats-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 3rem;
+max-width: 1200px;
+margin: 0 auto;
+}
+.stat-item {
+text-align: center;
+opacity: 0;
+transform: scale(0.8);
+transition: var(--transition-smooth);
+}
+.stat-item--visible {
+opacity: 1;
+transform: scale(1);
+}
+.stat-number {
+font-family: var(--font-serif);
+font-size: 4rem;
+font-weight: 300;
+margin-bottom: 0.5rem;
+line-height: 1;
+}
+.stat-label {
+font-size: 1rem;
+opacity: 0.9;
+letter-spacing: 1px;
+}
+/* ============================================
+CTA SECTION
+============================================ */
+.cta-section {
+text-align: center;
+padding: 8rem 2rem;
+background: var(--color-light);
+}
+.cta-section h2 {
+font-family: var(--font-serif);
+font-size: clamp(2rem, 4vw, 3rem);
+color: var(--color-accent);
+margin-bottom: 1.5rem;
+}
+.cta-section p {
+font-size: 1.2rem;
+color: var(--color-text-light);
+max-width: 700px;
+margin: 0 auto 3rem;
+line-height: 1.7;
+}
+.cta-buttons {
+display: flex;
+gap: 1rem;
+justify-content: center;
+flex-wrap: wrap;
+}
+.cta-button {
+display: inline-flex;
+align-items: center;
+gap: 0.75rem;
+padding: 1.25rem 2.5rem;
+background: var(--color-primary);
+color: var(--color-white);
+text-decoration: none;
+border-radius: 50px;
+font-size: 1rem;
+font-weight: 600;
+transition: var(--transition-smooth);
+opacity: 0;
+transform: translateY(30px);
+border: 2px solid var(--color-primary);
+}
+.cta-button--visible {
+opacity: 1;
+transform: translateY(0);
+}
+.cta-button:hover {
+background: var(--color-primary-dark);
+border-color: var(--color-primary-dark);
+transform: translateY(-4px);
+box-shadow: var(--shadow-md);
+}
+.cta-button--outline {
+background: transparent;
+color: var(--color-primary);
+}
+.cta-button--outline:hover {
+background: var(--color-primary);
+color: var(--color-white);
+}
+/* ============================================
+FOOTER
+============================================ */
+.footer {
+background: var(--color-dark);
+color: var(--color-white);
+text-align: center;
+padding: 3rem 2rem;
+}
+.footer p {
+opacity: 0.8;
+font-size: 0.9rem;
+margin-bottom: 0.5rem;
+}
+.footer__logo {
+height: 120px;
+margin-bottom: 1rem;
+opacity: 0.7;
+}
+/* ============================================
+RESPONSIVE
+============================================ */
+@media (max-width: 600px) {
+.hero__content {
+padding: 0 1.5rem;
+}
+.concept-grid {
+grid-template-columns: 1fr;
+padding: 0 1.5rem;
+}
+.stats-grid {
+grid-template-columns: repeat(2, 1fr);
+gap: 2rem;
+}
+.stat-number {
+font-size: 3rem;
+}
+.cta-buttons {
+flex-direction: column;
+align-items: center;
+}
+.cta-button {
+width: 100%;
+max-width: 300px;
+justify-content: center;
+}
+.section {
+padding: 4rem 1.5rem;
+}
+.fade-scroll__card {
+padding: 2rem;
+}
+.mobile-dropdown {
+right: 1rem;
+padding: 2rem 1.5rem;
+}
+}
+/* ============================================
+REDUCED MOTION
+============================================ */
+@media (prefers-reduced-motion: reduce) {
+*, *::before, *::after {
+animation-duration: 0.01ms !important;
+animation-iteration-count: 1 !important;
+transition-duration: 0.01ms !important;
+}
+html {
+scroll-behavior: auto;
+}
+}
+/* Mobile: Zeige Foto UND vier Säulen untereinander */
+@media (max-width: 767px) {
+/* Mobile-Flow (Foto) wieder anzeigen */
+.team-mobile {
+display: block !important;
+}
+/* Sticky-Scroll-Bereich auch auf Mobile anzeigen, aber anders */
+.sticky-scroll {
+display: block !important;
+}
+/* Auf Mobile: Sticky-Effekt deaktivieren, normaler Flow */
+.sticky-scroll__content {
+display: block !important;
+}
+.sticky-scroll__media {
+display: none !important; /* Foto aus Mobile-Flow verwenden */
+}
+.sticky-scroll__items {
+padding-top: 0 !important;
+}
+.sticky-scroll__item {
+margin-bottom: 3rem !important;
+opacity: 1 !important;
+transform: none !important;
+}
+/* Skills auch auf Mobile anzeigen */
+.skill-tag {
+opacity: 1 !important;
+transform: scale(1) !important;
+}
+}
+</style>
+</head>
+<body id="top">
+<!-- Progress Indicator -->
+<div class="progress-indicator" id="progressIndicator">
+<div class="progress-indicator__bar" id="progressBar"></div>
+</div>
+<!-- Navigation -->
+<nav class="nav" id="nav">
+<div class="nav__container">
+<img src="logo.png" alt="Logo" class="nav__logo">
+<ul class="nav__links">
+<li><a href="#motivation" class="nav__link">Motivation</a></li>
+<li><a href="#ueber-mich" class="nav__link">Über mich</a></li>
+<li><a href="#know-how" class="nav__link">Know-how</a></li>
+<li><a href="#aufgaben" class="nav__link">Aufgaben</a></li>
+<li><a href="#kontakt" class="nav__link">Kontakt</a></li>
+</ul>
+<button class="nav__burger" id="navBurger" aria-label="Menü öffnen">
+<span></span>
+<span></span>
+<span></span>
+</button>
+</div>
+</nav>
+<!-- Full-Screen Dropdown Menü -->
+<div class="mobile-dropdown" id="mobileDropdown">
+<a href="#top" class="mobile-dropdown__link">Start</a>
+<a href="#motivation" class="mobile-dropdown__link">Motivation</a>
+<a href="#ueber-mich" class="mobile-dropdown__link">Über mich</a>
+<a href="#know-how" class="mobile-dropdown__link">Know-how</a>
+<a href="#aufgaben" class="mobile-dropdown__link">Aufgaben</a>
+<a href="#kontakt" class="mobile-dropdown__link">Kontakt</a>
+</div>
+<!-- Hero Section -->
+<section class="hero">
+<div class="hero__background" id="heroBg"></div>
+<div class="hero__overlay"></div>
+<div class="hero__content">
+<p class="hero__eyebrow">Bewerbung 2026</p>
+<h1 class="hero__title">Project Manager<br>Ski Resorts & Destinations</h1>
+<p class="hero__subtitle">AXESS AG · Bludenz</p>
+<p class="hero__team">Toni Vollmann</p>
+</div>
+<div class="hero__scroll">Scrollen</div>
+</section>
+<!-- Einleitung - Fade Scroll Section -->
+<section class="fade-scroll" id="motivation">
+<div class="fade-scroll__background">
+<div class="fade-scroll__bg-item fade-scroll__bg-item--active" style="background-image: url('bgp2.png');"></div>
+<div class="fade-scroll__bg-item" style="background-image: url('bgp3.png');"></div>
+<div class="fade-scroll__bg-item" style="background-image: url('bgp4.png');"></div>
+</div>
+<div class="fade-scroll__foreground">
+<div class="fade-scroll__slide">
+<div class="fade-scroll__card" data-animate>
+<h3>Warum AXESS?</h3>
+<p>Innovation trifft auf Bergleidenschaft – genau das begeistert mich an AXESS. Die Möglichkeit, Projekte dort voranzutreiben, wo Menschen die Berge erleben, verbindet meine technische Expertise mit meiner Faszination für den alpinen Raum. Die innovative Kultur und der Fokus auf maßgeschneiderte Lösungen für Ski-Resorts sind das Umfeld, in dem ich meine Stärken optimal einbringen kann.</p>
+</div>
+</div>
+<div class="fade-scroll__slide">
+<div class="fade-scroll__card" data-animate>
+<h3>Warum diese Rolle?</h3>
+<p>Die Kombination aus Projektleitung, technischer Beratung und direktem Kundenkontakt ist genau mein Bereich: Ich verstehe technische Systeme, kann aber auch mit Kunden auf Augenhöhe kommunizieren und ihre Bedürfnisse in erfolgreiche Projekte übersetzen. Mein Fachabitur Informatik, meine Ausbildung zum Zweiradmechatroniker und meine mehrjährige Erfahrung in der Kundenbetreuung machen mich zum idealen Kandidaten für diese Position.</p>
+</div>
+</div>
+<div class="fade-scroll__slide">
+<div class="fade-scroll__card" data-animate>
+<h3>Was ich mitbringe</h3>
+<p>Ich arbeite strukturiert, denke analytisch und finde Lösungen, die Kunden und Teams begeistern. Ich bin kommunikationsstark, gewohnt, eigenständig Projekte zu koordinieren, und bringe fundiertes technisches Verständnis mit. Die Weiterentwicklung von Prozessen und Systemen aktiv voranzutreiben – das ist die Aufgabe, die mich antreibt.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Über mich - Mobile Flow -->
+<div class="team-mobile">
+<div class="team-mobile__member" data-member="toni">
+<div class="team-mobile__photo-section">
+<div class="team-mobile__photo" style="background-image: url('Toni.png');"></div>
+<div class="team-mobile__overlay"></div>
+<div class="team-mobile__identity">
+<h2 class="team-mobile__name">Toni Vollmann</h2>
+<p class="team-mobile__role">Project Manager · Techniker · Teamplayer</p>
+</div>
+<div class="team-mobile__scroll-hint">Scrollen</div>
+</div>
+<div class="team-mobile__text-section">
+<div class="team-mobile__text-content">
+<p class="team-mobile__text-role">Project Manager · Techniker · Teamplayer</p>
+<h3 class="team-mobile__text-name">Toni Vollmann</h3>
+<p class="team-mobile__text-description">
+Ich bin ein technisch versierter Quereinsteiger mit Fachabitur Informatik, abgeschlossener Ausbildung als Zweiradmechatroniker und mehrjähriger Führungserfahrung als stellvertretender Geschäftsführer. Diese Kombination aus IT-Affinität, technischem Verständnis und Kommunikationsstärke macht mich zum idealen Kandidaten für die Projektleitung im Ski-Resort-Bereich.
+</p>
+<p class="team-mobile__text-description">
+Ich arbeite strukturiert, lösungsorientiert und habe Spaß daran, Projekte zu koordinieren, Kunden kompetent zu beraten und technische Systeme zu konfigurieren.
+</p>
+<div class="team-mobile__skills">
+<span class="team-mobile__skill-tag">Technisches Verständnis</span>
+<span class="team-mobile__skill-tag">Fachabitur Informatik</span>
+<span class="team-mobile__skill-tag">Projektkoordination</span>
+<span class="team-mobile__skill-tag">Analytisches Denken</span>
+<span class="team-mobile__skill-tag">Strukturierte Arbeitsweise</span>
+<span class="team-mobile__skill-tag">Kundenorientierung</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Über mich - Desktop Sticky Scroll -->
+<section class="sticky-scroll section--full" id="ueber-mich">
+<div class="sticky-scroll__container">
+<div class="section__header">
+<p class="section__eyebrow">Über mich</p>
+<h2 class="section__title">Ein Profil mit vielen Facetten</h2>
+<p class="section__lead">Vier Säulen machen mich zum passenden Kandidaten für diese Stelle.</p>
+</div>
+<div class="sticky-scroll__content">
+<div class="sticky-scroll__media">
+<div class="sticky-scroll__media-item sticky-scroll__media-item--visible" style="background-image: url('Toni.png');"></div>
+<div class="sticky-scroll__media-item" style="background-image: url('Toni.png');"></div>
+<div class="sticky-scroll__media-item" style="background-image: url('Toni 2.png');"></div>
+<div class="sticky-scroll__media-item" style="background-image: url('Toni 2.png');"></div>
+</div>
+<div class="sticky-scroll__items">
+<div class="sticky-scroll__item" data-animate>
+<h3>Technik & IT</h3>
+<p class="sticky-scroll__role">Fachabitur Informatik · Zweiradmechatroniker</p>
+<p>Mein Fachabitur Informatik hat mir ein solides Fundament in Programmierung, Systemdenken und digitaler Logik vermittelt. Die anschließende Ausbildung zum Zweiradmechatroniker hat dieses Wissen mit praktischer Technik verbunden – ich durchdringe Systeme, verstehe Schnittstellen und finde Fehler, wo andere aufhören zu suchen. Technisches Verständnis für Hardware und Software bringe ich selbstverständlich mit.</p>
+<div class="sticky-scroll__skills">
+<span class="skill-tag">Systemverständnis</span>
+<span class="skill-tag">Hardware & Software</span>
+<span class="skill-tag">Schnittstellen</span>
+<span class="skill-tag">Technische Dokumentation</span>
+</div>
+</div>
+<div class="sticky-scroll__item" data-animate>
+<h3>Projektleitung & Struktur</h3>
+<p class="sticky-scroll__role">Analytisches Denken · Strukturierte Arbeitsweise</p>
+<p>In meiner Tätigkeit als stellvertretender Geschäftsführer und zuletzt als Assistenz der Geschäftsführung habe ich gelernt, komplexe Anforderungen zu analysieren, Prioritäten zu setzen und Lösungen systematisch zu erarbeiten. Ich koordiniere bereichsübergreifend, behalte den Überblick über Projekte und sorge für reibungslose Abläufe – genau das, was es für erfolgreiche Projektleitung braucht.</p>
+<div class="sticky-scroll__skills">
+<span class="skill-tag">Projektkoordination</span>
+<span class="skill-tag">Strukturiert</span>
+<span class="skill-tag">Organisiert</span>
+<span class="skill-tag">Eigeninitiative</span>
+</div>
+</div>
+<div class="sticky-scroll__item" data-animate>
+<h3>Kundenberatung & Kommunikation</h3>
+<p class="sticky-scroll__role">Kommunikationsstark · Serviceorientiert</p>
+<p>Kommunikation ist meine Stärke. Ich formuliere klar, höre aktiv zu und finde auch in schwierigen Situationen die richtigen Worte. Als erste Anlaufstelle für Kunden habe ich jahrelange Erfahrung darin, kompetent zu beraten, Wünsche verständlich auf den Punkt zu bringen und professionelle Kundentermine eigenständig durchzuführen.</p>
+<div class="sticky-scroll__skills">
+<span class="skill-tag">Deutsch (Muttersprache)</span>
+<span class="skill-tag">Kommunikationsstark</span>
+<span class="skill-tag">Kundenberatung</span>
+<span class="skill-tag">Serviceorientiert</span>
+</div>
+</div>
+<div class="sticky-scroll__item" data-animate>
+<h3>Flexibilität & Lernbereitschaft</h3>
+<p class="sticky-scroll__role">Quereinsteiger mit Haltung</p>
+<p>Ich liebe es, Neues zu lernen – sei es neue IT-Systeme, technische Herausforderungen oder branchenspezifische Prozesse. Ich arbeite engagiert, zuverlässig und mit Blick fürs Detail. Auch in unerwarteten Situationen bleibe ich flexibel, kann improvisieren und finde immer Wege, die das Arbeiten für mich, das Team und die Kunden einfacher machen.</p>
+<div class="sticky-scroll__skills">
+<span class="skill-tag">Lernbereitschaft</span>
+<span class="skill-tag">Flexibel</span>
+<span class="skill-tag">Lösungsorientiert</span>
+<span class="skill-tag">Engagiert</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Know-how Section -->
+<section class="section" id="know-how">
+<div class="section__header">
+<p class="section__eyebrow">Know-how, das ich mitbringe</p>
+<h2 class="section__title">Sechs Stärken für Ihre Stelle</h2>
+<p class="section__lead">Was mich zum passenden Project Manager für Ski Resorts & Destinations macht.</p>
+</div>
+<div class="concept-grid">
+<div class="concept-card" data-animate>
+<div class="concept-card__icon">💻</div>
+<h3>Technisches Verständnis</h3>
+<p>Fachabitur Informatik und technische Ausbildung bilden das Fundament:</p>
+<ul>
+<li>Verständnis für Software- und Hardware-Systeme</li>
+<li>Systemdenken und logische Problemlösung</li>
+<li>Schnelle Aneignung neuer IT-Systeme</li>
+<li>Technische Affinität und digitales Verständnis</li>
+<li>Fähigkeit zur Systemkonfiguration</li>
+</ul>
+</div>
+<div class="concept-card" data-animate>
+<div class="concept-card__icon">🗣️</div>
+<h3>Kundenberatung & Kommunikation</h3>
+<p>Kompetent und klar mit Kunden kommunizieren:</p>
+<ul>
+<li>Deutsch als Muttersprache</li>
+<li>Kommunikationsstarke Persönlichkeit</li>
+<li>Erfahrung in professioneller Kundenberatung</li>
+<li>Komplexe Themen verständlich erklären</li>
+<li>Serviceorientierte Gesprächsführung</li>
+</ul>
+</div>
+<div class="concept-card" data-animate>
+<div class="concept-card__icon">🎯</div>
+<h3>Projektmanagement</h3>
+<p>Projekte strukturiert zum Erfolg führen:</p>
+<ul>
+<li>Erfahrung in Projektkoordination</li>
+<li>Bereichsübergreifende Organisation</li>
+<li>Strukturierte Arbeitsweise</li>
+<li>Hohe Eigeninitiative</li>
+<li>Lösungsorientiertes Handeln</li>
+</ul>
+</div>
+<div class="concept-card" data-animate>
+<div class="concept-card__icon">📋</div>
+<h3>Dokumentation & Organisation</h3>
+<p>Strukturiert und organisiert arbeiten:</p>
+<ul>
+<li>Saubere Dokumentation von Prozessen</li>
+<li>Koordination von Aufgaben und Vereinbarungen</li>
+<li>Projektfortschritte im Blick behalten</li>
+<li>Prioritäten klar setzen</li>
+<li>Effizienz als dauerhaftes Ziel</li>
+</ul>
+</div>
+<div class="concept-card" data-animate>
+<div class="concept-card__icon">📚</div>
+<h3>Lernbereitschaft & Flexibilität</h3>
+<p>Neues lernen und flexibel bleiben:</p>
+<ul>
+<li>Schnelle Einarbeitung in neue Systeme</li>
+<li>Offen für neue Technologien</li>
+<li>Branchenwissen kontinuierlich erweitern</li>
+<li>Flexibilität in unerwarteten Situationen</li>
+<li>Fähigkeit zur Improvisation</li>
+</ul>
+</div>
+<div class="concept-card" data-animate>
+<div class="concept-card__icon">🚀</div>
+<h3>Prozessentwicklung & Innovation</h3>
+<p>Prozesse und Systeme aktiv weiterentwickeln:</p>
+<ul>
+<li>Erfahrung in Prozessoptimierung</li>
+<li>Aktive Mitarbeit an Weiterentwicklung</li>
+<li>Ideen einbringen und umsetzen</li>
+<li>Zusammenarbeit im Team</li>
+<li>Innovation als Chance begreifen</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Aufgaben Section -->
+<section class="section" id="aufgaben" style="background: var(--color-white);">
+<div class="section__header">
+<p class="section__eyebrow">Aufgaben, die mich begeistern</p>
+<h2 class="section__title">Worauf ich mich freue</h2>
+<p class="section__lead">Die beschriebenen Aufgaben sprechen mich besonders an – hier kann ich meine Stärken einbringen.</p>
+</div>
+<div class="concept-grid">
+<div class="concept-card" data-animate>
+<div class="concept-card__icon">🤝</div>
+<h3>Projekte leiten & zum Erfolg führen</h3>
+<p>Vielfältige Projekte zu leiten und sicher zum Erfolg zu bringen, entspricht genau meiner strukturierten und lösungsorientierten Arbeitsweise. Ich behalte den Überblick, koordiniere bereichsübergreifend und sorge für reibungslose Abläufe.</p>
+</div>
+<div class="concept-card" data-animate>
+<div class="concept-card__icon">📐</div>
+<h3>Kundentermine eigenständig durchführen</h3>
+<p>Kundentermine vor Ort eigenständig und professionell durchzuführen, verbindet meine Kommunikationsstärke mit meiner technischen Expertise. Ich berate kompetent, verstehe die Bedürfnisse der Kunden und übersetze sie in erfolgreiche Projekte.</p>
+</div>
+<div class="concept-card" data-animate>
+<div class="concept-card__icon">🔍</div>
+<h3>Kundensysteme konfigurieren & dokumentieren</h3>
+<p>Kundensysteme zu konfigurieren und eine saubere Dokumentation sicherzustellen, macht mir Spaß. Ich habe einen geschulten Blick für Details, arbeite strukturiert und sorge dafür, dass Systeme optimal funktionieren.</p>
+</div>
+<div class="concept-card" data-animate>
+<div class="concept-card__icon">🏢</div>
+<h3>Zentrale Ansprechperson für Kunden</h3>
+<p>Als zentrale Ansprechperson für Kunden den Überblick zu behalten, Aufgaben zu koordinieren und Projektfortschritte zu dokumentieren – das ist meine Stärke. Ich bin kommunikationsstark, serviceorientiert und behalte auch in komplexen Situationen den Überblick.</p>
+</div>
+<div class="concept-card" data-animate>
+<div class="concept-card__icon">💡</div>
+<h3>Kunden kompetent beraten</h3>
+<p>Kunden kompetent zu spezifischen Fragen rund um Software und Hardware zu beraten, ist genau mein Bereich. Ich verstehe technische Zusammenhänge, kann sie aber auch verständlich kommunizieren und finde immer die passende Lösung.</p>
+</div>
+<div class="concept-card" data-animate>
+<div class="concept-card__icon">⚡</div>
+<h3>Prozesse und Systeme weiterentwickeln</h3>
+<p>Mich aktiv einzubringen und die Weiterentwicklung von Prozessen und Systemen voranzutreiben – das ist die Art von Verantwortung, die mich antreibt. Ich bringe Ideen ein, arbeite lösungsorientiert und sorge dafür, dass Innovationen erfolgreich umgesetzt werden.</p>
+</div>
+</div>
+</section>
+<!-- Stats Section -->
+<section class="stats-section">
+<div class="stats-grid">
+<div class="stat-item" data-animate>
+<div class="stat-number">5+</div>
+<div class="stat-label">Jahre Führungserfahrung</div>
+</div>
+<div class="stat-item" data-animate>
+<div class="stat-number">IT</div>
+<div class="stat-label">Fachabitur Informatik</div>
+</div>
+<div class="stat-item" data-animate>
+<div class="stat-number">100%</div>
+<div class="stat-label">Lernbereitschaft</div>
+</div>
+<div class="stat-item" data-animate>
+<div class="stat-number">∞</div>
+<div class="stat-label">Engagement</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="cta-section" id="kontakt">
+<h2>Lust, mich kennenzulernen?</h2>
+<p>Ich freue mich darauf, in einem persönlichen Gespräch mehr über die Stelle, das Team und die Möglichkeiten bei AXESS zu erfahren. Meine vollständigen Unterlagen liegen bei.</p>
+<div class="cta-buttons">
+<a href="mailto:toni.vollmann@gmx.at?subject=Bewerbung%20Project%20Manager%20Ski%20Resorts%20%26%20Destinations" class="cta-button" data-animate>
+📧 Jetzt Kontakt aufnehmen
+</a>
+<a href="Lebenslauf Toni Vollmann Customer Support.pdf" class="cta-button cta-button--outline" data-animate download>
+📄 Lebenslauf herunterladen
+</a>
+</div>
+</section>
+<!-- Footer -->
+<footer class="footer">
+<img src="logo.png" alt="Logo" class="footer__logo">
+<p>&copy; 2026 Toni Vollmann</p>
+<p>Bewerbung als Project Manager Ski Resorts & Destinations · AXESS AG</p>
+</footer>
+<!-- GSAP + ScrollTrigger via CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+// ============================================
+// INITIALISIERUNG
+// ============================================
+gsap.registerPlugin(ScrollTrigger);
+// ============================================
+// NAVIGATION SCROLL-EFFEKT
+// ============================================
+const nav = document.getElementById('nav');
+const hero = document.querySelector('.hero');
+window.addEventListener('scroll', () => {
+if (window.scrollY > hero.offsetHeight * 0.8) {
+nav.classList.add('nav--on-light');
+} else {
+nav.classList.remove('nav--on-light');
+}
+});
+// ============================================
+// PROGRESS INDICATOR
+// ============================================
+const progressIndicator = document.getElementById('progressIndicator');
+const progressBar = document.getElementById('progressBar');
+ScrollTrigger.create({
+start: 'top top',
+end: 'bottom bottom',
+onUpdate: (self) => {
+const progress = self.progress * 100;
+progressBar.style.width = progress + '%';
+if (self.progress > 0.05) {
+progressIndicator.classList.add('progress-indicator--active');
+} else {
+progressIndicator.classList.remove('progress-indicator--active');
+}
+}
+});
+// ============================================
+// HERO PARALLAX
+// ============================================
+const heroBg = document.getElementById('heroBg');
+gsap.to(heroBg, {
+yPercent: 30,
+ease: 'none',
+scrollTrigger: {
+trigger: '.hero',
+start: 'top top',
+end: 'bottom top',
+scrub: true
+}
+});
+gsap.to('.hero__eyebrow', { opacity: 1, y: 0, duration: 1, delay: 0.3, ease: 'power3.out' });
+gsap.to('.hero__title', { opacity: 1, y: 0, duration: 1, delay: 0.5, ease: 'power3.out' });
+gsap.to('.hero__subtitle', { opacity: 1, y: 0, duration: 1, delay: 0.7, ease: 'power3.out' });
+gsap.to('.hero__team', { opacity: 1, y: 0, duration: 1, delay: 0.9, ease: 'power3.out' });
+// ============================================
+// FADE SCROLL
+// ============================================
+const fadeScrollSections = document.querySelectorAll('.fade-scroll');
+fadeScrollSections.forEach(section => {
+const bgItems = section.querySelectorAll('.fade-scroll__bg-item');
+const slides = section.querySelectorAll('.fade-scroll__slide');
+const cards = section.querySelectorAll('.fade-scroll__card');
+slides.forEach((slide, index) => {
+ScrollTrigger.create({
+trigger: slide,
+start: 'top center',
+end: 'bottom center',
+onEnter: () => {
+bgItems.forEach(item => item.classList.remove('fade-scroll__bg-item--active'));
+if (bgItems[index]) bgItems[index].classList.add('fade-scroll__bg-item--active');
+},
+onEnterBack: () => {
+bgItems.forEach(item => item.classList.remove('fade-scroll__bg-item--active'));
+if (bgItems[index]) bgItems[index].classList.add('fade-scroll__bg-item--active');
+}
+});
+});
+cards.forEach(card => {
+ScrollTrigger.create({
+trigger: card,
+start: 'top 80%',
+onEnter: () => card.classList.add('fade-scroll__card--visible'),
+onLeaveBack: () => card.classList.remove('fade-scroll__card--visible')
+});
+});
+});
+// ============================================
+// STICKY SCROLL (Über mich)
+// ============================================
+const stickyScrollSections = document.querySelectorAll('.sticky-scroll');
+stickyScrollSections.forEach(section => {
+const mediaItems = section.querySelectorAll('.sticky-scroll__media-item');
+const items = section.querySelectorAll('.sticky-scroll__item');
+items.forEach((item, index) => {
+ScrollTrigger.create({
+trigger: item,
+start: 'top 70%',
+onEnter: () => item.classList.add('sticky-scroll__item--visible'),
+onLeaveBack: () => item.classList.remove('sticky-scroll__item--visible')
+});
+ScrollTrigger.create({
+trigger: item,
+start: 'top center',
+end: 'bottom center',
+onEnter: () => {
+mediaItems.forEach(m => m.classList.remove('sticky-scroll__media-item--visible'));
+if (mediaItems[index]) mediaItems[index].classList.add('sticky-scroll__media-item--visible');
+},
+onEnterBack: () => {
+mediaItems.forEach(m => m.classList.remove('sticky-scroll__media-item--visible'));
+if (mediaItems[index]) mediaItems[index].classList.add('sticky-scroll__media-item--visible');
+}
+});
+const skills = item.querySelectorAll('.skill-tag');
+skills.forEach((skill, skillIndex) => {
+ScrollTrigger.create({
+trigger: item,
+start: 'top 60%',
+onEnter: () => {
+setTimeout(() => skill.classList.add('skill-tag--visible'), skillIndex * 100);
+},
+onLeaveBack: () => skill.classList.remove('skill-tag--visible')
+});
+});
+});
+});
+// ============================================
+// MOBILE TEAM FLOW
+// ============================================
+document.querySelectorAll('.team-mobile__member').forEach(member => {
+const photo = member.querySelector('.team-mobile__photo');
+const photoSection = member.querySelector('.team-mobile__photo-section');
+const identity = member.querySelector('.team-mobile__identity');
+const scrollHint = member.querySelector('.team-mobile__scroll-hint');
+const textContent = member.querySelector('.team-mobile__text-content');
+const textSection = member.querySelector('.team-mobile__text-section');
+gsap.to(photo, {
+yPercent: 20,
+ease: 'none',
+scrollTrigger: {
+trigger: photoSection,
+start: 'top bottom',
+end: 'bottom top',
+scrub: true
+}
+});
+gsap.fromTo(identity,
+{ opacity: 0, y: 30 },
+{
+opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+scrollTrigger: { trigger: photoSection, start: 'top 60%', end: 'top 30%', scrub: 1 }
+}
+);
+gsap.to(scrollHint, {
+opacity: 0,
+scrollTrigger: { trigger: photoSection, start: 'top 40%', end: 'top 20%', scrub: true }
+});
+ScrollTrigger.create({
+trigger: textSection,
+start: 'top 80%',
+onEnter: () => textContent.classList.add('team-mobile__text-content--visible'),
+onLeaveBack: () => textContent.classList.remove('team-mobile__text-content--visible')
+});
+});
+// ============================================
+// KNOW-HOW CARDS
+// ============================================
+const conceptCards = document.querySelectorAll('.concept-card');
+conceptCards.forEach((card, index) => {
+ScrollTrigger.create({
+trigger: card,
+start: 'top 85%',
+onEnter: () => {
+setTimeout(() => card.classList.add('concept-card--visible'), index * 100);
+},
+onLeaveBack: () => card.classList.remove('concept-card--visible')
+});
+});
+// ============================================
+// STATS ANIMATION
+// ============================================
+const statItems = document.querySelectorAll('.stat-item');
+statItems.forEach((stat, index) => {
+ScrollTrigger.create({
+trigger: stat,
+start: 'top 80%',
+onEnter: () => {
+setTimeout(() => {
+stat.classList.add('stat-item--visible');
+const statNumber = stat.querySelector('.stat-number');
+const text = statNumber.textContent;
+if (text === '∞' || text === 'IT') return;
+const targetValue = parseFloat(text);
+const suffix = text.replace(/[0-9.]/g, '');
+statNumber.textContent = '0' + suffix;
+gsap.to({ val: 0 }, {
+val: targetValue,
+duration: 2,
+ease: 'power2.out',
+onUpdate: function() {
+const currentVal = Math.round(this.targets()[0].val);
+statNumber.textContent = currentVal + suffix;
+}
+});
+}, index * 150);
+},
+onLeaveBack: () => stat.classList.remove('stat-item--visible')
+});
+});
+// ============================================
+// CTA BUTTONS
+// ============================================
+const ctaButtons = document.querySelectorAll('.cta-button');
+ctaButtons.forEach((button, index) => {
+ScrollTrigger.create({
+trigger: button,
+start: 'top 90%',
+onEnter: () => {
+setTimeout(() => button.classList.add('cta-button--visible'), index * 200);
+},
+onLeaveBack: () => button.classList.remove('cta-button--visible')
+});
+});
+// ============================================
+// SMOOTH SCROLL
+// ============================================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function(e) {
+e.preventDefault();
+const target = document.querySelector(this.getAttribute('href'));
+if (target) {
+target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+});
+});
+// ============================================
+// BURGER MENÜ
+// ============================================
+const burger = document.getElementById('navBurger');
+const mobileDropdown = document.getElementById('mobileDropdown');
+if (burger && mobileDropdown) {
+burger.addEventListener('click', () => {
+mobileDropdown.classList.toggle('mobile-dropdown--open');
+burger.classList.toggle('nav__burger--open');
+});
+mobileDropdown.querySelectorAll('.mobile-dropdown__link').forEach(link => {
+link.addEventListener('click', () => {
+mobileDropdown.classList.remove('mobile-dropdown--open');
+burger.classList.remove('nav__burger--open');
+});
+});
+document.addEventListener('click', (e) => {
+if (!burger.contains(e.target) && !mobileDropdown.contains(e.target)) {
+mobileDropdown.classList.remove('mobile-dropdown--open');
+burger.classList.remove('nav__burger--open');
+}
+});
+}
+// ============================================
+// REFRESH SCROLLTRIGGER
+// ============================================
+let resizeTimer;
+window.addEventListener('resize', () => {
+clearTimeout(resizeTimer);
+resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 250);
+});
+window.addEventListener('load', () => ScrollTrigger.refresh());
+</script>
+</body>
+</html>
